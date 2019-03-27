@@ -57,7 +57,7 @@ stop
 
 **业务流程图如下：**
 
-![flow1](flow1.jpg)
+![flow1](./flow1.jpg)
 
 **流程说明：**
 
@@ -108,7 +108,7 @@ stop
 
 **业务流程图如下：**
 
-![flow2](flow2.jpg)
+![flow2](./flow2.jpg)
 
 **流程说明：**
 
