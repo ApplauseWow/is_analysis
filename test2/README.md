@@ -292,7 +292,7 @@ stop
 ```
 @startuml
 start
-if (有超期记录) then(是)
+if (有超期记录?) then(是)
     :缴纳罚金;
     :清除超期记录]
 else (否)
