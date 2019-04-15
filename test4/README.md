@@ -21,7 +21,7 @@ activate 登录界面
 activate 数据库
 数据库 -> 登录界面 :反馈结果
 deactivate 数据库
-Person -> 登录界面 :进入系统
+Person <- 登录界面 :进入相应界面
 deactivate 登录界面
 deactivate Person
 @enduml
