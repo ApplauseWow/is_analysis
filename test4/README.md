@@ -5,7 +5,7 @@
 
 ## 图书管理系统的顺序图
 ---
-主要描述了 __登录__、__借阅图书__、__归还图书__、__录入图书__ 四个用例的时序图。
+主要描述了 __登录__、__借阅图书__、__归还图书__、__录入图书__、__修改图书信息__ 五个用例的时序图。
 
 ## 1. 登录用例
 ## 1.1. 登录用例PlantUML源码
@@ -30,8 +30,8 @@ deactivate User
 ## 1.3. 借书用例顺序图说明
 User是用户。<br>
 - 在登录界面输入账号密码（User activate）提交验证。
-- 然后在Person用户表中查询验证（Person activate）。
-- 然后返回结果（Person deactivate），用户可以进入系统或者无法进入系统（User deactivate）。
+- 然后在用户表中查询验证（用户activate）。
+- 然后返回结果（用户deactivate），用户可以进入系统或者无法进入系统（User deactivate）。
 
 ***
 
@@ -124,7 +124,7 @@ deactivate Reader
 ``` sequence
 @startuml
 actor libManager
-participant Person
+participant 用户 as Person
 participant 图书 as book
 libManager -> Person :账号登录\n login()
 activate libManager
@@ -148,4 +148,42 @@ deactivate libManager
 - 图书管理员输入图书信息并提交addBook(Book b)。（图书activate）。
 - 图书添加新数据（图书deactivate）。
 - 回显结果（LibManager deactivate）。
+***
+
+## 5. 修改图书信息用例
+## 5.1. 修改图书信息用例PlantUML源码
+
+``` sequence
+@startuml
+Actor libManager
+participant 用户 as Person
+participant 图书 as Book
+libManager -> Person :登录\n login(Person p)
+activate libManager
+activate Person
+Person -> Person :验证
+Person ->libManager :回显结果
+deactivate Person
+libManager -> Book :查询图书\n searchBook(Book b)
+activate Book
+Book -> libManager :回显结果
+deactivate Book
+libManager -> Book :修改信息\n modifyBookInfo(Book b)
+activate Book
+Book -> Book :修改信息
+Book -> libManager :回显修改结果
+deactivate Book
+deactivate libManager
+@enduml
+```
+
+## 4.2. 录入图书用例顺序图
+![class](modifyBookInfo.png)
+
+## 4.3. 录入图书用例顺序图说明
+- 图书管理员登录系统（图书管理员activate）。
+- 图书管理员输入图书信息并提交查询searchBook(Book b)。（图书activate）。
+- 图书回显查询结果（图书deactivate）。
+- 图书管理员修改信息提交modifyBookInfo(Book b),图书修改数据（图书activate）。
+- 回显修改结果（图书、LibManager deactivate）。
 ***
