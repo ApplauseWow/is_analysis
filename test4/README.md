@@ -177,10 +177,10 @@ deactivate libManager
 @enduml
 ```
 
-## 4.2. 录入图书用例顺序图
+## 5.2. 修改图书信息用例顺序图
 ![class](modifyBookInfo.png)
 
-## 4.3. 录入图书用例顺序图说明
+## 5.3. 修改图书信息用例顺序图说明
 - 图书管理员登录系统（图书管理员activate）。
 - 图书管理员输入图书信息并提交查询searchBook(Book b)。（图书activate）。
 - 图书回显查询结果（图书deactivate）。
