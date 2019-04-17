@@ -24,11 +24,12 @@
 ## 2. 界面设计
 ## 2.1. 借书界面设计
 ![index](ui_index.png)
-（默认图书管理员已经登录系统）__index.html__
+<br>（默认图书管理员已经登录系统）__index.html__
 ![result](ui_searchResults.png)
 __search_result.html__
 ![info](ui_modifyInfo.png)
 __modify_book_info.html__
+### __连接如下:__[UI页面]: https://applausewow.github.io/is_analysis_pages/ui/index.html "UI design"
 - 用例图参见：修改图书信息用例
 - 类图参见：图书管理员类、图书类
 - 顺序图参见：修改图书信息顺序图
