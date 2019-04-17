@@ -17,6 +17,7 @@ participant Person
 activate User
 User -> Person :输入账号密码，提交验证\n login(Person p)
 activate Person
+Person -> Person :验证
 Person -> User :反馈结果,进入相应界面
 deactivate Person
 deactivate User
