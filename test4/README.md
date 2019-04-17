@@ -12,18 +12,14 @@
 
 ``` sequence
 @startuml
-actor Person
-Person -> 登录界面 :输入用户名密码
-database 数据库
+actor User
+participant Person
+activate User
+User -> Person :输入账号密码，提交验证\n login(Person p)
 activate Person
-activate 登录界面
-登录界面 -> 数据库 :验证
-activate 数据库
-数据库 -> 登录界面 :反馈结果
-deactivate 数据库
-Person <- 登录界面 :进入相应界面
-deactivate 登录界面
+Person -> User :反馈结果,进入相应界面
 deactivate Person
+deactivate User
 @enduml
 ```
 
@@ -31,10 +27,10 @@ deactivate Person
 ![class](login.png)
 
 ## 1.3. 借书用例顺序图说明
-Person是各个角色所继承的抽象类，此处也抽象表示一个用户。<br>
-- 在登录界面输入账号密码（登录界面activate）。
-- 然后传输给数据可匹配验证（数据库activate）。
-- 然后返回结果（数据库deactivate），用户可以进入系统或者无法进入系统（登录界面、Person deactivate）。
+User是用户。<br>
+- 在登录界面输入账号密码（User activate）提交验证。
+- 然后在Person用户表中查询验证（Person activate）。
+- 然后返回结果（Person deactivate），用户可以进入系统或者无法进入系统（User deactivate）。
 
 ***
 
@@ -52,13 +48,15 @@ activate Reader
 activate book
 book -> Reader :回显结果
 deactivate book
-Reader -> borrowNotice :借阅书籍\n borrowBook()
+Reader -> book :借阅书籍\n borrowBook()
+activate book
+book -> book :修改借阅状态
+book -> borrowNotice :添加借阅记录
+deactivate book
 activate borrowNotice
 alt borrow successfully
     borrowNotice -> borrowNotice :添加借阅记录
-    activate borrowNotice
     borrowNotice -> Reader :借阅成功
-    deactivate borrowNotice
 else some Exceptions occur
     borrowNotice -> Reader :借阅失败
     deactivate borrowNotice
@@ -72,9 +70,9 @@ deactivate Reader
 
 ## 2.3. 借阅图书用例顺序图说明
 - Reader输入查询条件，返回查询结果(Reader、图书 activate)。
-- Reader借阅图书，修改图书借阅状态为借出（图书activate），传输图书信息给借阅记录(借阅记录activate)。
-- 如果能借，借阅记录则添加一条记录(借阅记录activate)，并反馈成功信息。
-- 如不能借，则直接反馈失败信息。
+- Reader借阅图书，修改图书借阅状态为借出，传输图书信息给借阅记录(借阅记录activate)。
+- 如果能借，借阅记录则添加一条记录，并反馈成功信息。
+- 如不能借，则直接反馈失败信息(Reader、借阅记录 deactivate)。
 ***
 
 ## 3. 归还图书用例
@@ -90,26 +88,22 @@ participant 逾期记录 as overDeadLineNotice
 Reader -> book :还书\n returnBook()
 activate Reader
 activate book
-activate book
 book -> book :修改借阅状态
-deactivate book
 book -> borrowNotice :添加归还日期
 deactivate book
 activate borrowNotice
-activate borrowNotice
 borrowNotice -> borrowNotice :添加归还日期
-deactivate borrowNotice
 alt was over the deadline
     borrowNotice -> overDeadLineNotice :添加逾期记录
     activate overDeadLineNotice
-    activate overDeadLineNotice
     overDeadLineNotice -> overDeadLineNotice :添加逾期记录
-    deactivate overDeadLineNotice
     overDeadLineNotice -> Reader :归还成功，需要缴纳罚金
     deactivate overDeadLineNotice
 else wasn't over the deadline
     borrowNotice -> Reader :归还成功
 end
+deactivate borrowNotice
+deactivate Reader
 @enduml
 ```
 
@@ -118,9 +112,9 @@ end
 
 ## 3.3. 归还图书用例顺序图说明
 - Reader归还图书，扫描图书信息后(Reader activate)，将图书借阅状态改为未借出(图书activate)，再传输数据给借阅记录表添加归还日期（借阅记录activate）。
-- 图书借阅记录添加后（图书借阅activate），判断是否逾期。
-- 如果逾期，则传递数据给逾期记录表（逾期记录activate），添加逾期记录，并给Reader回显归还结果。
-- 如果没有逾期，直接给Reader回显归还结果。
+- 图书借阅记录添加后，判断是否逾期。
+- 如果逾期，则传递数据给逾期记录表（逾期记录activate），添加逾期记录，并给Reader回显归还结果（逾期记录deactivate）。
+- 如果没有逾期，直接给Reader回显归还结果(Reader、借阅记录deactivate)。
 ***
 
 ## 4. 录入图书用例
@@ -129,23 +123,18 @@ end
 ``` sequence
 @startuml
 actor libManager
-participant 登录界面 as login
+participant Person
 participant 图书 as book
-libManager -> login :账号登录\n login()
-activate libManager 
-activate login
-login -> libManager :回显登陆结果
-deactivate login
-
-libManager -> book :输入图书信息\n addBook()
+libManager -> Person :账号登录\n login()
 activate libManager
-activate book
+activate Person
+Person -> libManager :回显登陆结果
+deactivate Person
+libManager -> book :输入图书信息\n addBook(Book b)
 activate book
 book -> book :添加如数信息
-deactivate book
 book -> libManager :添加成功
 deactivate book
-deactivate libManager
 deactivate libManager
 @enduml
 ```
@@ -155,7 +144,7 @@ deactivate libManager
 
 ## 4.3. 录入图书用例顺序图说明
 - 图书管理员登录系统（图书管理员activate）。
-- 图书管理员输入图书信息。（图书管理员activate）。
-- 图书添加新数据（图书activate）。
-- 回显结果。
+- 图书管理员输入图书信息并提交addBook(Book b)。（图书activate）。
+- 图书添加新数据（图书deactivate）。
+- 回显结果（LibManager deactivate）。
 ***
