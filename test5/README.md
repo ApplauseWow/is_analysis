@@ -8,16 +8,63 @@
 ## 1.1. 图书表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|ISBN|varchar2(100)|主键|否||||
-|Name|varchar2(100)| |否||||
-|Memo|varchar2(100)| |是||||
+|BookId     |varchar(12)   |主键|否| |Primary Key|图书ID（索引号）|
+|BookName   |varchar(20)   | |否| | |书名|
+|author     |varchar(20)   | |是|None| |作者|
+|publication|varchar(50)   | |是|None| |出版社|
+|price      |int           | |是|0.0|price>=0;浮点数|不添加则0.0元|
+|num        |int           | |是|0|num>=0;整数|馆藏数量，不添加则为0|
+|status     |int           | |是|0| |1:可借;0:不可借|
 
-## 1.2. ***表
+## 1.2. 用户表
 |字段|类型|主键，外键|可以为空|默认值|约束|说明|
 |:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
-|ISBN|varchar2(100)|主键|否||||
-|Name|varchar2(100)| |否||||
-|Memo|varchar2(100)| |是||||
+|userId     |varchar(12)   |主键|否| |primary key|用户名|
+|pwd        |varchar(16)   | |否| | |密码|
+
+
+## 1.3. 读者表
+|字段|类型|主键，外键|可以为空|默认值|约束|说明|
+|:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
+|readerId   |varchar(12)   |主键、外键|否| | primary key|读者id，同时关联用户表的userId同是一个字段|
+|name       |varchar(20)   | |否| | | 密码|
+|isPass     |int           | |是| | |是否通过系统管理员审核，0:没有;1:通过|
+
+## 1.4. 图书管理员表
+|字段|类型|主键，外键|可以为空|默认值|约束|说明|
+|:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
+|libManagerId|varchar(12)   |主键、外键|否| | primary key|图书管理员id，同时关联用户表的userId同是一个字段|
+|name        |varchar(20)   | |否| | |密码|
+|isPass      |int           | |否| | |是否通过系统管理员审核，0:没有;1:通过|
+
+
+## 1.5. 系统管理员表
+|字段|类型|主键，外键|可以为空|默认值|约束|说明|
+|:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
+|sysManagerId |varchar(12)  |主键、外键|否| | primary key|系统管理员id，同时关联用户表的userId同是一个字段|
+|pwd          |varchar(20)  | |否| | |密码|
+
+
+## 1.6. 借阅记录表
+|字段|类型|主键，外键|可以为空|默认值|约束|说明|
+|:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
+|noticeId   |int           |主键|否| |Primary Key|自增ID|
+|BookId     |varchar(12)   |外键|否| | |图书ID（索引号）|
+|readerId   |varchar(20)   |外键|否| | |读者ID|
+|startDate  |datetime      | |否| | |借阅日期|
+|returnDate |datetime      | |是|None| |归还日期，初始为空，归还后记录|
+|status     |int           | |是|0| |借阅状态，已归还:1;未归还:0|
+
+
+## 1.7. 逾期记录表
+|字段|类型|主键，外键|可以为空|默认值|约束|说明|
+|:-------:|:-------------:|:------:|:----:|:---:|:----:|:-----|
+|noticeId   |int           |主键|否| |Primary Key|自增ID|
+|BookId     |varchar(12)   |外键|否| | |图书ID（索引号）|
+|readerId   |varchar(20)   |外键|否| | |读者ID|
+|overDays   |int           | |否| |overDays>=1|逾期时间|
+|status     |int           | |是|0| |支付状态，已已支付:1;未支付:0|
+
 
 ***
 
@@ -35,31 +82,31 @@ __modify_book_info.html__
 - 顺序图参见：修改图书信息顺序图
 - API接口如下：
 
-1. 获取全部分类
+1. 获取图书查询结果
 
-- 功能：用于获取全部分类
-- 请求地址： http://[YOUR_DOMAIN]/v1/api/shop_cate
-- 请求方法：POST
+- 功能：用于获取图书信息
+- 请求地址： http://www.applausewow.cn/library/v1/api/searchBook/book_name
+- 请求方法：GET
 - 请求参数：
 
 |参数名称|必填|说明|
 |:-------:|:-------------: | :----------:|
-|access_token|是|用于验证请求合法性的认证信息。 |
-|method|是|固定为 “GET”。|
+|book_name|是|书名。 |
+
 
 - 返回实例：
 ```
 {
-    "info": "感谢您的支持。",
+    "info": "查询成功"
     "data": {
-        "nickname": "O记_Mega可达鸭",
-        "uid": "14361",
-        "signature": "呀  一不小心就进化了",
-        "score1": "322",
-        "real_nickname": "O记_Mega可达鸭",
-        "title": "Lv3 转正",
-        "avatar128": "http://upload.opensns.cn/Uploads_Avatar_14361_58e4b58fccf81.jpg?imageMogr2/crop/!260x260a6a22/thumbnail/128x128!",
-        "avatar512": "http://upload.opensns.cn/Uploads_Avatar_14361_58e4b58fccf81.jpg?imageMogr2/crop/!260x260a6a22/thumbnail/512x512!"
+        "bookName": "快学Scala",
+        "bookId": "14361",
+        "publication": "电子工业出版社",
+        "author": "[美]C.S.霍斯曼",
+        "price": 78.0,
+        "num": 1,
+        "loc": "社科阅览室",
+        "status": "可借"
     },
     "code": 200
 }
@@ -68,35 +115,34 @@ __modify_book_info.html__
     
 |参数名称|说明|
 |:-------:|:-------------: |
-|Info|返回信息|
-|data|用户的个人信息|
-|dodo|返回码|
+|Info|返回查询结果信息|
+|data|图书信息（书名、图书ID、出版社、作者、价格、馆藏数、定位、借阅状态）|
+|code|返回状态码|
 
-2. *******API
-- 功能：用于获取全部分类
-- 请求地址： http://[YOUR_DOMAIN]/v1/api/shop_cate
-- 请求方法：POST
+2. 修改图书信息API
+- 功能：用于修改图书信息
+- 请求地址： http://www.applausewow/library/v1/api/modify_book_info/bookId
+- 请求方法：GET
 - 请求参数：
 
 |参数名称|必填|说明|
 |:-------:|:-------------: | :----------:|
-|access_token|是|用于验证请求合法性的认证信息。 |
-|method|是|固定为 “GET”。|
+|bookId|是|图书唯一ID。 |
 
 - 返回实例：
 ```
 {
-    "info": "感谢您的支持。",
+    "info": "图书信息。",
     "data": {
-        "nickname": "O记_Mega可达鸭",
-        "uid": "14361",
-        "signature": "呀  一不小心就进化了",
-        "score1": "322",
-        "real_nickname": "O记_Mega可达鸭",
-        "title": "Lv3 转正",
-        "avatar128": "http://upload.opensns.cn/Uploads_Avatar_14361_58e4b58fccf81.jpg?imageMogr2/crop/!260x260a6a22/thumbnail/128x128!",
-        "avatar512": "http://upload.opensns.cn/Uploads_Avatar_14361_58e4b58fccf81.jpg?imageMogr2/crop/!260x260a6a22/thumbnail/512x512!"
-    },
+            "bookName": "快学Scala",
+            "bookId": "14361",
+            "publication": "电子工业出版社",
+            "author": "[美]C.S.霍斯曼",
+            "price": 78.0,
+            "num": 1,
+            "loc": "社科阅览室"
+            "status": "可借"
+        },
     "code": 200
 }
 ```
@@ -105,8 +151,41 @@ __modify_book_info.html__
 |参数名称|说明|
 |:-------:|:-------------: |
 |Info|返回信息|
-|data|用户的个人信息|
-|dodo|返回码|
+|data|图书信息|
+|code|返回状态码|
 
+3. 保存图书信息API
+- 功能：用于保存修改后图书信息
+- 请求地址： http://www.applausewow/library/v1/api/save_book_info?bookId=...&bookName=...&...
+- 请求方法：PUT
+- 请求参数：
+
+|参数名称|必填|说明|
+|:-------:|:-------------: | :----------:|
+|bookId|是|图书唯一ID。|
+|bookName|是|书名。|
+|publication|是|出版社。 |
+|author|是|作者。 |
+|price|是|图书价格。 |
+|num|是|图书馆藏数。 |
+|loc|是|图书定位。 |
+|status|是|借阅状态。 |
+
+
+- 返回实例：
+```
+{
+    "info": "修改成功。",
+    "status": true,
+    "code": 200
+}
+```
+- 返回参数说明：
+    
+|参数名称|说明|
+|:-------:|:-------------: |
+|Info|返回信息|
+|status|修改状态|
+|dodo|返回状态码|
 
  
