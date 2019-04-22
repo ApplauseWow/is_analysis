@@ -11,10 +11,19 @@
 @startuml
 left to right direction
 package cn.edu.cdu.model{
-    Abstract Person
+    Abstract Person{
+        {field}-String id
+        -String pwd
+        ..main  method..
+        +void   logIn(Person p)
+        ..getter and setter..
+        +String getId()
+        +void   setId(String id)
+        +String getPwd()
+        +void   setPwd(String pwd)
+    }
     class Reader {
         {field}-String  readerId   (KP)
-        -String  pwd
         -String  name
         -Boolean isPass
         ..main method..
@@ -24,8 +33,6 @@ package cn.edu.cdu.model{
         +Boolean returnBook(Book b)
         ..getter and setter..
         +String  getReaderId()
-        +String  getPwd()
-        +void    setPwd()
         +String  getName()
         +void    setName()
         +Boolean getIsPass()
@@ -34,7 +41,6 @@ package cn.edu.cdu.model{
 
     class LibManager{
         {field}-String  libManagerId   (KP)
-        -String  pwd
         -String  name
         -Boolean isPass
         ..main method..
@@ -45,8 +51,6 @@ package cn.edu.cdu.model{
         +Boolean  modifyBookInfo(Book b)
         ..getter and setter..
         +String  getLibManagerId()
-        +String  getPwd()
-        +void    setPwd()
         +String  getName()
         +void    setName()
         +Boolean getIsPass()
@@ -55,14 +59,12 @@ package cn.edu.cdu.model{
 
     class SysManager{
         -String  sysManagerId
-        -String  pwd
         ..main method..
         +Person[] searchAllUser()
         +Boolean  reviewUser(String userId, Boolean status)
         ..getter and setter..
         +String  getSysManagerId()
-        +String  getPwd()
-        +void    setPwd()
+
     }
 
     class Book{
@@ -144,6 +146,7 @@ SysManager ..> LibManager
 ### 1.2. 类图如下：
 
 ![class](class.png)
+（__说明：__Person类不是抽象类，算一个用户表，每种角色都是用户，共同的属性有用户名和密码，而在类图中尽量简洁，所以Reader不用再写userID和pwd，但是各种角色有各自的ID（在登陆时会选择角色类型），但是！！在数据库设计中每个角色对应的表必须加上userID，对于用户知道各自的ID和pwd，但是userID是透明的，选择角色然后输入ID和pwd，再通过userID在用户表中查找pwd。）
 
 ### 1.3. 类图说明：
 关系简明<br>
