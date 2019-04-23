@@ -84,7 +84,7 @@ __modify_book_info.html__
 - 顺序图参见：修改图书信息顺序图
 - API接口如下：
 
-1. 获取图书查询结果
+### 1. 获取图书查询结果
 
 - 功能：用于获取图书信息
 - 请求地址： http://www.applausewow.cn/library/v1/api/searchBook/book_name
@@ -121,7 +121,7 @@ __modify_book_info.html__
 |data|图书信息（书名、图书ID、出版社、作者、价格、馆藏数、定位、借阅状态）|
 |code|返回状态码|
 
-2. 修改图书信息API
+### 2. 修改图书信息API
 - 功能：用于修改图书信息
 - 请求地址： http://www.applausewow/library/v1/api/modify_book_info/bookId
 - 请求方法：GET
@@ -156,7 +156,7 @@ __modify_book_info.html__
 |data|图书信息|
 |code|返回状态码|
 
-3. 保存图书信息API
+### 3. 保存图书信息API
 - 功能：用于保存修改后图书信息
 - 请求地址： http://www.applausewow/library/v1/api/save_book_info?bookId=...&bookName=...&...
 - 请求方法：PUT
