@@ -48,6 +48,10 @@
   font-size:10px;
   text-align:left;
 }
+.label {
+  font-size:14px;
+  text-align:left;
+}
 .paragraph {
   text-align:left;
 }
@@ -73,6 +77,9 @@
   text-align:left;
 }
 .sticky_3 {
+  text-align:left;
+}
+.sticky_4 {
   text-align:left;
 }
 .link_button {
