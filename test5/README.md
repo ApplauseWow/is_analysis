@@ -71,7 +71,7 @@
 ***
 
 ## 2. 界面设计
-## 2.1. 借书界面设计
+## 2.1. 修改图书信息界面设计
 ![index](ui_index.png)
 <br>（默认图书管理员已经登录系统）__index.html__
 ![result](ui_searchResults.png)
