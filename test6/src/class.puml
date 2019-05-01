@@ -4,6 +4,7 @@ left to right direction
 package cn.edu.cdu.final.model{
     class User{
         - String userId  （用户ID）   (KP)
+        - String name   （姓名）
         - String pwd    （密码）
         - String gitHubId   （GitHub账号）
         ..main method..
@@ -11,16 +12,17 @@ package cn.edu.cdu.final.model{
         + Boolean modifyPwd(User u)
         ..getter and setter..
         + String getUserId()
+        + String getName()
         + String getPwd()
         + String getGitHubId()
         + void setUserId(String id)
         + void setPwd(String pwd)
         + void setGitHubId(String id)
+        + void setName(String name)
     }
 
     class Teacher{
         - String teacherId   （教师工号）   (KP)
-        - String name   （姓名）
         - String school     （所属学校）
         - String department     （所属部门）
         ..main method..
@@ -32,18 +34,15 @@ package cn.edu.cdu.final.model{
         + void giveScore(Score s)
         ..getter and setter..
         + String getTeachId()
-        + String getName()
         + String getSchool()
         + String getDepartment()
         + void setTeacherId(String tId)
-        + void setName(String name)
         + void setSchool(String school)
         + void setDepartment(String d)
     }
 
     class Student{
         - String stuId   （学号）   (KP)
-        - String name   （姓名）
         - String school     （所属学校）
         - String grade      （年级）
         - String claz       （班）
@@ -53,13 +52,11 @@ package cn.edu.cdu.final.model{
         + Score getCourseScore(Course c, Student stu)
         ..getter and setter..
         + String getStuId()
-        + String getName()
         + String getSchool()
         + String getGrade()
         + String getClaz()
         + String getMajor
         + void setStuId(String stuId)
-        + void setName(String name)
         + void setSchool(String s)
         + void setGrade(String g)
         + void setClaz(String c)
