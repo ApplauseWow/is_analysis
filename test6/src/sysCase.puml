@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+
+:用户: as user
+:教师: as teacher
+:学生: as stu
+
+stu --|> user
+teacher --|> user
+
+package 用户用例集{
+    (登录) as login
+    (查看用户信息) as showSelfInfo
+    (修改用户信息) as modifySelfInfo
+    (修改密码) as modifyPwd
+    (登出) as logout
+}
+
+user --> modifySelfInfo
+user --> showSelfInfo
+user --> login
+user --> logout
+user --> modifyPwd
+
+modifySelfInfo <. showSelfInfo : <<extend>>
+showSelfInfo .> login : <<include>>
+modifyPwd .> login : <<include>>
+
+package 教师用例集{
+    (查看学生列表) as showAllStu
+    (添加学生) as addStudents
+    (添加课程) as addCourse
+    (添加课程评分细则) as addScoreItem
+    (成绩评定) as giveScore
+}
+
+teacher --> addCourse
+teacher --> showAllStu
+teacher --> addStudents
+teacher --> giveScore
+teacher --> addScoreItem
+
+addStudents .> addCourse : <<include>>
+addScoreItem .> addCourse : <<include>>
+giveScore .> showAllStu : <<include>>
+
+package 学生用例集{
+    (查看课程成绩) as showScore
+    (查看课程列表) as showAllCourse
+}
+
+stu --> showScore
+stu --> showAllCourse
+
+showScore .> showAllCourse : <<include>>
+@enduml

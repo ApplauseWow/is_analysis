@@ -1,0 +1,130 @@
+@startuml
+left to right direction
+
+package cn.edu.cdu.final.model{
+    class User{
+        - String userId  （用户ID）   (KP)
+        - String pwd    （密码）
+        - String gitHubId   （GitHub账号）
+        ..main method..
+        + Boolean login(User u)
+        + Boolean modifyPwd(User u)
+        ..getter and setter..
+        + String getUserId()
+        + String getPwd()
+        + String getGitHubId()
+        + void setUserId(String id)
+        + void setPwd(String pwd)
+        + void setGitHubId(String id)
+    }
+
+    class Teacher{
+        - String teacherId   （教师工号）   (KP)
+        - String name   （姓名）
+        - String school     （所属学校）
+        - String department     （所属部门）
+        ..main method..
+        + List<Student> getAllStu()
+        + Boolean addStudents(String grade, String claz)
+        + Boolean addCourse(Course c)
+        + Boolean addScoreItems(ScoreItem st)
+        + void getStudent(Student stu)
+        + void giveScore(Score s)
+        ..getter and setter..
+        + String getTeachId()
+        + String getName()
+        + String getSchool()
+        + String getDepartment()
+        + void setTeacherId(String tId)
+        + void setName(String name)
+        + void setSchool(String school)
+        + void setDepartment(String d)
+    }
+
+    class Student{
+        - String stuId   （学号）   (KP)
+        - String name   （姓名）
+        - String school     （所属学校）
+        - String grade      （年级）
+        - String claz       （班）
+        - String major      （专业）
+        ..main method..
+        + List<Course> getAllCourses(Student stu)
+        + Score getCourseScore(Course c, Student stu)
+        ..getter and setter..
+        + String getStuId()
+        + String getName()
+        + String getSchool()
+        + String getGrade()
+        + String getClaz()
+        + String getMajor
+        + void setStuId(String stuId)
+        + void setName(String name)
+        + void setSchool(String s)
+        + void setGrade(String g)
+        + void setClaz(String c)
+        + void setMajor(String m)
+    }
+
+    class Course{
+        - String courseId    （课程号）   (KP)
+        - String courseName     （课程名称）
+        - String teacherId      （教师工号）
+        - String term       （开课学期）
+        ..getter and setter..
+        + String getCourseId()
+        + String getCourseName()
+        + String getTeacherId()
+        + String getTerm()
+        + void setCourseId(String id)
+        + void setCourseName(String name)
+        + void setTeacherId(String tId)
+        + void setTerm(String term)
+    }
+
+    class Score{
+        - String StuId      （学号）     （KP）
+        - Double score      （成绩）
+        - String review     （评论）
+        - Integer testId     （实验ID）  （KP）
+        ..getter and setter..
+        + String getStuId()
+        + Double getScore()
+        + String getReview()
+        + String getTestId()
+        + void setStuId(String id)
+        + void setScore(Double tId)
+        + void setReview(String r)
+        + void setTestId(String n)
+    }
+
+    class Test{
+        - String testId          （实验ID）      （KP）
+        - String courseId       （课程号）
+        - Integer testNum       (试验编号)
+        - List<Map<String, Double>> scoreItem   （评分项）
+        ..getter and setter..
+        + Integer getTestNum()
+        + String getCourseId()
+        + String getTestId()
+        + List<Map<String, Double>> getScoreItem()
+        + void setCourseId(String id)
+        + void setScoreItem(List<Map<String, Double>> r)
+        + void setTestId(String n)
+        + void setTestNum(int n)
+
+    }
+
+    User <|-- Teacher
+    User <|-- Student
+
+    Teacher "1" ..> "*" Course
+    Student "1" <.. "*" Score
+    Score "*" ..> "1" Test
+    Test "*" ..> "1" Course
+
+}
+
+
+
+@enduml
