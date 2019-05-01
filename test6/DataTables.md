@@ -1,6 +1,4 @@
-﻿﻿<!-- markdownlint-disable MD033-->
-<!-- 禁止MD033类型的警告 https://www.npmjs.com/package/markdownlint -->
-
+﻿
 # 数据库设计 [首页](./README.md)
     
 <div id="USERS"></div>
