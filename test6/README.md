@@ -28,7 +28,7 @@
 ![](./class.png)
 
 ## 5. 数据库设计
-- ### [参见数据库设计](./数据库设计.md)
+- ### [参见数据库设计](./DataTables.md)
 
 ## 6. 用例及界面详细设计
 - ### [“学生列表”用例](./用例/学生列表.md),[界面](https://zwdbox.github.io/is_analysis/test6/ui/index.html)
