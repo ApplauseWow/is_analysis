@@ -31,7 +31,7 @@
 - ### [参见数据库设计](./DataTables.md)
 
 ## 6. 用例及界面详细设计
-- ### [“查看学生列表”用例](./case/showStuList.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/index.html)
+- ### [“查看学生列表”用例](./case/showStuList.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/managecourese.html)
 - ### [“成绩评定”用例](./case/giveScore.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/score.html)
 - ### [“查看课程成绩”用例](./case/showScores.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/score.html)
 - ### [“修改密码”用例](./case/modifyPwd.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/modifypwd.html)
