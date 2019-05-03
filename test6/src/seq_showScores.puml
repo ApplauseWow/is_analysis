@@ -1,0 +1,15 @@
+@startuml
+Actor 用户 as user
+Participant Test
+Participant Score
+
+user -> Test :showScores()\n根据点击进入的课程号和学号\n查询实验评分细则
+activate user
+activate Test
+Test -> Score :再查询出学生的该课程实验成绩\n未评分则为空
+deactivate Test
+activate Score
+Score --> user :回显各个实验的评分细则和所得小分以及该实验成绩
+deactivate Score
+deactivate user
+@enduml

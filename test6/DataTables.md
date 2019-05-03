@@ -55,9 +55,10 @@
     |:-------:|:-------------:|:------:|:----:|:---:|:----:|:----------|
     |TEST_ID|VARCHAR2(50 BYTE)|联合主键1，外键|否| | | 实验ID，Test表外键|
     |STUDENT_ID|VARCHAR2(50 BYTE)|联合主键2，外键|否| | | 学生的学号，Student表外键|
-    |SCORE|NUMBER|主键|是|空| 取值0-100| 分数，这个值为空表示没有批改|
+    |SCORE|NUMBER| |是|空| 取值0-100| 分数，这个值为空表示没有批改|
     |REVIEW|VARCHAR2(400 BYTE)| |是|空| | 老师对实验的评语|
-
+    |EACH_SCORE|VARCHAR2(50 BYTE)| |是|空|  | 每个评分项分数组成的字符串，用分隔符分开|
+    
 <div id="TESTS"></div>
 
 - ## Test表（实验项目表）

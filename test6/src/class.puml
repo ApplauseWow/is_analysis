@@ -81,18 +81,21 @@ package cn.edu.cdu.final.model{
 
     class Score{
         - String StuId      （学号）     （KP）
+        - String testId     （实验ID）  （KP）
         - Double score      （成绩）
         - String review     （评论）
-        - Integer testId     （实验ID）  （KP）
+        - List<Integer> eachScore      (每个评分项所对应的得分)
         ..getter and setter..
         + String getStuId()
         + Double getScore()
         + String getReview()
         + String getTestId()
+        + List<Integer> getEachScore()
         + void setStuId(String id)
         + void setScore(Double tId)
         + void setReview(String r)
         + void setTestId(String n)
+        + void setEachScore(List<Integer> es)
     }
 
     class Test{

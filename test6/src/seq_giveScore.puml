@@ -1,0 +1,7 @@
+@startuml
+Actor 教师 as tea
+Participant Score
+
+tea -> Score :输入各项细则评分\n计算出该实验总分\nsaveScore()
+Score --> tea :回显评分结果
+@enduml

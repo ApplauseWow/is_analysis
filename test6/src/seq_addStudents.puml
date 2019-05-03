@@ -1,0 +1,18 @@
+@startuml
+Actor 教师 as tea
+Participant Student
+Participant Test
+Participant Score
+activate tea
+tea -> Student : 根据所选班级查找所有学生\n addStudent()
+activate Student
+Student -> Test :得到课程实验评分项
+deactivate Student
+activate Test
+Test -> Score :根据实验评分项\n生成实验成绩，\n建立学生与课程关联
+deactivate Test
+activate Score
+Score --> tea :回显添加结果
+deactivate Score
+deactivate tea
+@enduml

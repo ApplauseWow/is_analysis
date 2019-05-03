@@ -1,0 +1,19 @@
+@startuml
+Actor 教师 as tea
+Participant Score
+Participant Student
+
+tea -> Score :根据点进来的课程号\n在成绩表中找到\n该课程的所有学号\n连接查询学生信息\ngetStuList()
+activate tea
+activate Score
+Score -> Student :查询学生信息\n
+deactivate Score
+activate Student
+Student --> Score :返回学生列表
+deactivate Student
+activate Score
+Score -> Score :查找对应学号的实验成绩
+Score --> tea :返回学生信息及各个实验成绩
+deactivate Score
+deactivate tea
+@enduml
