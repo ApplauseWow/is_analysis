@@ -1,5 +1,5 @@
 # 接口：addScoreItems  [返回](../README.md)
-用例： [添加课程评分细则](../case/addScoreItems)
+用例： [添加课程评分细则](../case/addScoreItem.md)
 
 - 权限：
     老师：登录后添加课程后必须添加课程实验评分细则。
