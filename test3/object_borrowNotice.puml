@@ -1,0 +1,9 @@
+@startuml
+object borrowNotice{
+    noticeId = "12"
+    bookId = "9856"
+    readerId = "10001"
+    borrowDate = "2019-4-5"
+    returnDate = "2019-5-5"
+}
+@enduml

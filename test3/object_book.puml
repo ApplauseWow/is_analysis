@@ -1,0 +1,10 @@
+@startuml
+object book{
+    bookId = “9856”
+    author = "Kwok"
+    publication = "工业出版社"
+    price = 56.8
+    num = 2
+    status = True
+}
+@enduml

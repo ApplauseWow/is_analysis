@@ -1,0 +1,6 @@
+@startuml
+object sysManager{
+    sysManagerId = "30003"
+    pwd = "123"
+}
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+Actor libManager
+participant 用户 as Person
+participant 图书 as Book
+libManager -> Person :登录\n login(Person p)
+activate libManager
+activate Person
+Person -> Person :验证
+Person ->libManager :回显结果
+deactivate Person
+libManager -> Book :查询图书\n searchBook(Book b)
+activate Book
+Book -> libManager :回显结果
+deactivate Book
+libManager -> Book :修改信息\n modifyBookInfo(Book b)
+activate Book
+Book -> Book :修改信息
+Book -> libManager :回显修改结果
+deactivate Book
+deactivate libManager
+@enduml

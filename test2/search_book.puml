@@ -1,0 +1,11 @@
+@startuml
+start
+:输入图书信息]
+:检索;
+if (有查询结果?) then(有)
+    :显示查询结果;
+else (无)
+    :显示没有结果;
+endif
+stop
+@enduml

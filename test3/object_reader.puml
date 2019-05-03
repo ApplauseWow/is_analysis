@@ -1,0 +1,8 @@
+@startuml
+object reader{
+        readerId = "10001"
+        pwd = "123"
+        name = "holy"
+        isPass = "True"
+}
+@enduml

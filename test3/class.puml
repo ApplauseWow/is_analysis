@@ -1,0 +1,133 @@
+@startuml
+left to right direction
+package cn.edu.cdu.model{
+    Abstract Person{
+        {field}-String id
+        -String pwd
+        ..main  method..
+        +void   logIn(Person p)
+        ..getter and setter..
+        +String getId()
+        +void   setId(String id)
+        +String getPwd()
+        +void   setPwd(String pwd)
+    }
+    class Reader {
+        {field}-String  readerId   (KP)
+        -String  name
+        -Boolean isPass
+        ..main method..
+        +Boolean modifySelfInfo(Reader r)
+        +Book    searchBook(String name)
+        +Boolean borrowBook(Book b)
+        +Boolean returnBook(Book b)
+        ..getter and setter..
+        +String  getReaderId()
+        +String  getName()
+        +void    setName()
+        +Boolean getIsPass()
+        +void    setIsPass()
+    }
+
+    class LibManager{
+        {field}-String  libManagerId   (KP)
+        -String  name
+        -Boolean isPass
+        ..main method..
+        +Boolean  modifySelfInfo(LibManager lm)
+        +Book     searchBook(String bookId)
+        +Boolean  addBook(Book b)
+        +Boolean  delBook(String bookId)
+        +Boolean  modifyBookInfo(Book b)
+        ..getter and setter..
+        +String  getLibManagerId()
+        +String  getName()
+        +void    setName()
+        +Boolean getIsPass()
+        +void    setIsPass()
+    }
+
+    class SysManager{
+        -String  sysManagerId
+        ..main method..
+        +Person[] searchAllUser()
+        +Boolean  reviewUser(String userId, Boolean status)
+        ..getter and setter..
+        +String  getSysManagerId()
+
+    }
+
+    class Book{
+        {field}-String  bookId (KP)
+        -String  author
+        -String  publication
+        -Double  price
+        -Integer num
+        -Boolean status
+        ..getter and setter..
+        +String  getBookId()
+        +String  getAuthor()
+        +String  getPublication()
+        +Double  getPrice()
+        +Integer getNum()
+        +Boolean getStatus()
+        +void    setAuthor()
+        +void    setPublication()
+        +void    setPrice()
+        +void    setNum()
+        +void    setStatus()
+    }
+
+    class BorrowNotice{
+        {field}-String noticeId    (KP)
+        -String bookId
+        -String readerId
+        -Date   borrowDate
+        -Date   returnDate
+        ..getter and setter..
+        +String getNoticeId()
+        +String getBookId()
+        +String getReaderId()
+        +Date   getBorrowDate()
+        +Date   getReturnDate()
+        +void   setBorrowDate()
+        +void   setReturnDate()
+        +void   setBookId()
+        +void   setReaderId()
+    }
+
+    class OverDeadLineNotice{
+        {field}-String  noticeId   (KP)
+        -String  bookId
+        -String  readerId
+        -Integer overDays
+        -Boolean isPaid
+        ..getter and setter..
+        +String  getNoticeId()
+        +String  getBookId()
+        +String  getReaderId()
+        +Integer getOverDays()
+        +Boolean getIsPaid()
+        +void    setBookId()
+        +void    setReaderId()
+        +void    setOverDays()
+        +void    setIsPaid()
+    }
+
+}
+
+
+Person <|-- Reader
+Person <|-- LibManager
+Person <|-- SysManager
+
+Reader ..> Reader : 修改个人信息
+LibManager ..> LibManager : 修改个人信息
+Reader "1" ..> "*" BorrowNotice : 借书
+Book "1" -- "*" BorrowNotice : 借阅情况
+LibManager "1" ..> "*" Book : 对图书增删查改
+BorrowNotice "1" o-- "0..1" OverDeadLineNotice
+SysManager ..> Reader
+SysManager ..> LibManager
+
+@enduml

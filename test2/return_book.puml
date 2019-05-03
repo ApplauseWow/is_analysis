@@ -1,0 +1,6 @@
+@startuml
+start
+:归还图书;
+:清除借阅记录]
+stop
+@enduml

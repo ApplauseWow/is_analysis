@@ -1,0 +1,12 @@
+@startuml
+start
+:输入图书信息]
+:查询图书;
+if (是否有查询结果?) then(有)
+    :删除图书;
+    :删除图书信息]
+else (无)
+    :系统提示，没有查询结果;
+endif
+stop
+@enduml

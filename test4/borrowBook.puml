@@ -1,0 +1,25 @@
+@startuml
+actor Reader
+participant "图书" as book
+participant "借阅记录" as borrowNotice
+
+Reader -> book :输入条件查询\n searchBook()
+activate Reader
+activate book
+book -> Reader :回显结果
+deactivate book
+Reader -> book :借阅书籍\n borrowBook()
+activate book
+book -> book :修改借阅状态
+book -> borrowNotice :添加借阅记录
+deactivate book
+activate borrowNotice
+alt borrow successfully
+    borrowNotice -> borrowNotice :添加借阅记录
+    borrowNotice -> Reader :借阅成功
+else some Exceptions occur
+    borrowNotice -> Reader :借阅失败
+    deactivate borrowNotice
+end
+deactivate Reader
+@enduml

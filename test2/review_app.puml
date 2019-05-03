@@ -1,0 +1,7 @@
+@startuml
+start
+:审核;
+:提交审核结果]
+:存储审核结果;
+stop
+@enduml

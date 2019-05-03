@@ -1,0 +1,15 @@
+@startuml
+
+start
+:输入账号密码]
+if (是否存在？) then(是)
+    if (密码是否正确？) then(是)
+        :进入系统;
+    else (否)
+        :提示：密码错误;
+    endif
+else (否)
+    :提示：账号不存在;
+endif
+stop
+@enduml

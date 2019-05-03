@@ -1,0 +1,9 @@
+@startuml
+object overDeadLineNotice{
+    noticeId = "10"
+    bookId = "9856"
+    readerId = "10001"
+    overDays = 3
+    isPaid = False
+}
+@enduml

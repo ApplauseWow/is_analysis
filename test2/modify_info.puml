@@ -1,0 +1,11 @@
+@startuml
+@startuml
+(*)  --> "检测输入为空"
+If "输入不为空" then
+--> [Yes] "存储信息"
+-->(*)
+else
+--> [No] "检测输入为空"
+Endif
+@enduml
+@enduml

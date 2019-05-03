@@ -1,0 +1,68 @@
+@startuml
+
+rectangle System{
+
+    actor :系统管理员: as sys_manager
+    actor :图书管理员: as lib_manager
+    actor :读者: as reader
+
+    usecase (修改信息) as modify_info
+    usecase (查询图书) as search_book
+
+    rectangle  open_system{
+        usecase (登录系统) as sign_in
+        usecase (注册账号) as sign_up
+        usecase (修改个人信息) as modify_self_info
+
+        sign_in .up.> sign_up : <<include>>
+        modify_self_info .up.> sign_in : <<include>>
+    }
+
+    rectangle reader_func{
+        usecase (借阅图书) as borrow_book
+        usecase (归还图书) as return_book
+        usecase (缴纳罚金) as pay_revenue
+
+        return_book .down.> pay_revenue : <<extend>>
+    }
+
+    rectangle lib_manager_func{
+        usecase (录入图书) as add_book
+        usecase (删除图书) as del_book
+        usecase (修改图书信息) as modify_book_info
+
+
+    }
+
+    rectangle sys_manager_func{
+        usecase (审核业务) as review_app
+    }
+
+    sign_in -left- reader
+    sign_up -left- reader
+    modify_self_info -left- reader
+    reader_func -down- reader
+
+    sign_in -right- lib_manager
+    sign_up -right- lib_manager
+    modify_self_info -right- lib_manager
+    lib_manager -right- lib_manager_func
+
+    sys_manager -down- sign_in
+    sys_manager -right- sys_manager_func
+
+    modify_self_info -down-|> modify_info
+    modify_book_info -down-|> modify_info
+
+    borrow_book .up.> search_book : <<include>>
+    modify_book_info .up.> search_book : <<include>>
+    del_book .up.> search_book : <<include>>
+    pay_revenue .right.> sign_in : <<include>>
+    lib_manager_func .up.> sign_in : <<include>>
+    sign_up ..> review_app : <<include>>
+
+
+
+}
+
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+object libManager{
+        libManagerId = "20002"
+        pwd = "123"
+        name = "holy"
+        isPass = "True"
+}
+@enduml

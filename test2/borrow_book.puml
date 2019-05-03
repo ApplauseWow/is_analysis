@@ -1,0 +1,13 @@
+@startuml
+start
+:输入书名]
+if (是否查询到结果？) then(Yes)
+    if (是否能借阅？) then(Yes)
+        :借阅图书]
+    else (No)
+    endif
+else (No)
+    :提示没有结果;
+endif
+stop
+@enduml

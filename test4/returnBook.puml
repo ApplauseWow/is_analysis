@@ -1,0 +1,26 @@
+@startuml
+actor Reader
+participant 图书 as book
+participant 借阅记录 as borrowNotice
+participant 逾期记录 as overDeadLineNotice
+
+Reader -> book :还书\n returnBook()
+activate Reader
+activate book
+book -> book :修改借阅状态
+book -> borrowNotice :添加归还日期
+deactivate book
+activate borrowNotice
+borrowNotice -> borrowNotice :添加归还日期
+alt was over the deadline
+    borrowNotice -> overDeadLineNotice :添加逾期记录
+    activate overDeadLineNotice
+    overDeadLineNotice -> overDeadLineNotice :添加逾期记录
+    overDeadLineNotice -> Reader :归还成功，需要缴纳罚金
+    deactivate overDeadLineNotice
+else wasn't over the deadline
+    borrowNotice -> Reader :归还成功
+end
+deactivate borrowNotice
+deactivate Reader
+@enduml
