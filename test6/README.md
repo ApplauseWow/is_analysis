@@ -19,7 +19,7 @@
 ## 2. 系统总体结构
 ![](./structure.png)
 
-界面设计参见：https://ApplauseWow.github.io/is_analysis_pages/final/index.html
+界面设计参见：https://ApplauseWow.github.io/is_analysis_pages/final/login.html
     
 ## 3. 用例图设计 [源码](src/sysCase.puml)
 ![](./sysCase.png)
@@ -41,5 +41,5 @@
 - ### [“登录”用例](./case/login.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/login.html)
 - ### [“添加学生”用例](./case/addStudents.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/addStudent.html)
 - ### [“添加课程”用例](./case/addCourse.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/addCourse.html)
-- ### [“添加课程评分细则”用例](./case/addScoreItems),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/addScoreItem.html)
+- ### [“添加课程评分细则”用例](case/addScoreItems.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/addScoreItem.html)
 - ### [“查看课程列表”用例](./case/showCourseList.md),[界面](https://ApplauseWow.github.io/is_analysis_pages/final/index.html)
