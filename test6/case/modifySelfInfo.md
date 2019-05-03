@@ -14,7 +14,7 @@
 无
 
 ## 3. 界面设计
-- 界面参照: https://ApplauseWow.github.io/is_analysis_pages/final/SelfInfo.html
+- 界面参照: https://ApplauseWow.github.io/is_analysis_pages/final/selfinfo.html
 - API接口调用
     - 接口1：[getSelfInfo](../interface/getSelfInfo.md)
     - 接口2：[saveSelfInfo](../interface/saveSelfInfo.md)

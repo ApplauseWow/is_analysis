@@ -15,7 +15,7 @@
 无
 
 ## 3. 界面设计
-- 界面参照: https://ApplauseWow.github.io/is_analysis_pages/final/modifyPwd.html
+- 界面参照: https://ApplauseWow.github.io/is_analysis_pages/final/modifypwd.html
 - API接口调用
     - 接口1：[savePwd](../interface/savePwd.md)
     - 接口2：[getSelfInfo](../interface/getSelfInfo.md)

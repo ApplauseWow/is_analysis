@@ -15,7 +15,7 @@
 无
 
 ## 3. 界面设计
-- 界面参照: https://ApplauseWow.github.io/is_analysis_pages/final/addScoreItem.html
+- 界面参照: https://ApplauseWow.github.io/is_analysis_pages/final/addscoreitem.html
 
 - API接口调用
 
