@@ -19,7 +19,7 @@
 
 - API接口调用
 
-    - 接口1：[addScoreItems](../interface/addScoreItems.md)
+    - 接口1：[addScoreItem](../interface/addScoreItem.md)
         
         保存提交实验评分项
          
